@@ -1,0 +1,38 @@
+{% load static %}
+
+<html>
+<link rel="stylesheet" href="{% static 'LectorTermometro/style.css' %}">
+
+<body>
+    <h1>
+        Termometros
+    </h1>
+    {% block content %}
+    <form action="" method="get">
+        <input type="date" name="q" placeholder="Fecha de la medida" value="{{ request.GET.q|default_if_none:"" }}">
+        <button type="submit">Buscar</button>
+    </form>
+    <a href="{% url 'LectorTermometro:listaElementos' %}" class="button">Lista de Elementos</a>
+    <a href="{% url 'LectorTermometro:listaTipos' %}" class="button">Lista de Tipo</a>
+    <table>
+        <thead>
+            <tr>
+                <td>ID Termometro</td>
+                <td>Temperatura</td>
+                <td>Hora y fecha de carga</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for medida, estado in medidas_con_estado %}
+            <tr>
+                <td class="{% if not estado %}fueraDeRango{% endif %}">{{medida.idTermometro}}</td>
+                <td class="{% if not estado %}fueraDeRango{% endif %}">{{medida.temperatura}}</td>
+                <td class="{% if not estado %}fueraDeRango{% endif %}">{{medida.fechaHoraMedida}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endblock %}
+
+</body>
+</html>

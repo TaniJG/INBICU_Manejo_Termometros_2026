@@ -1,0 +1,20 @@
+{% load static %}
+<html>
+<link rel="stylesheet" href="{% static 'LectorTermometro/style.css' %}">
+
+<head>
+    <title>Django Plotly</title>
+    <!-- Necesario para que Plotly funcione -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+
+<body>
+    <h1>Histogramas de Temperatura</h1>
+    {% for histograma in histogram_list %}
+    <div>
+        {{ histograma | safe }}
+    </div>
+    {% endfor %}
+</body>
+
+</html>

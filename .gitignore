@@ -1,0 +1,33 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Local environment and secrets
+.env
+local_settings.py
+db.sqlite3
+
+# Virtual environments
+venv/
+env/
+.venv/
+.env
+
+# Media and Static
+media/
+static_cdn/
+# Note: Do NOT ignore the 'static/' folder if it contains your original assets, 
+# only ignore it if it is the target for collectstatic.
+
+# Testing and coverage
+.coverage
+htmlcov/
+.tox/
+.cache
+.pytest_cache/
+
+# IDE specific files
+.vscode/
+.idea/
+*.swp

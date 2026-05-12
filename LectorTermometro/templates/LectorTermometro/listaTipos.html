@@ -1,0 +1,35 @@
+{% load static %}
+
+<html>
+<link rel="stylesheet" href="{% static 'LectorTermometro/style.css' %}">
+
+<body>
+    <h1>
+        Tipos de Elementos Medibles
+    </h1>
+    {% block content %}
+    <a href="{% url 'LectorTermometro:crearTipo' %}" class="button">Crear Tipo</a>
+    <a href="{% url 'LectorTermometro:listaTermometros' %}" class="button">Inicio</a>
+    <table>
+        <thead>
+            <tr>                
+                <td>Tipo de Elemento</td>
+                <td>Minima temperatura aceptable</td>
+                <td>Máxima temperatura aceptable</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for object in object_list %}
+            <tr>
+                <td>{{object.tipoElemento}}</td>
+                <td>{{object.minimoRango}}</td>
+                <td>{{object.maximoRango}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endblock %}
+
+</body>
+
+</html>

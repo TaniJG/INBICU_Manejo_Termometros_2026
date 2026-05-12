@@ -1,0 +1,33 @@
+{% load static %}
+
+<html>
+<link rel="stylesheet" href="{% static 'LectorTermometro/style.css' %}">
+
+<body>
+    <h1>
+        Elementos medidos con Termometro
+    </h1>
+    {% block content %}
+    <a href="{% url 'LectorTermometro:crearElemento' %}" class="button">Crear Elemento</a>
+    <a href="{% url 'LectorTermometro:listaTermometros' %}" class="button">Inicio</a>
+    <table>
+        <thead>
+            <tr>
+                <td>ID Elemento</td>
+                <td>Tipo de Elemento</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for object in object_list %}
+            <tr>
+                <td>{{object.idElemento}}</td>
+                <td>{{object.tipoElemento}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endblock %}
+
+</body>
+
+</html>

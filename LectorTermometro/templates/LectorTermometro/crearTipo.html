@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Tipo de Elemento</title>
+    <link rel="stylesheet" href="{% static 'LectorTermometro/style.css' %}">
+</head>
+
+<body>
+    <div class="datos-container">
+        <h1>
+            Crear Tipo de Elemento
+        </h1>
+        <form method="post">{% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Save">
+        </form>
+    </div>
+</body>
+
+</html>
