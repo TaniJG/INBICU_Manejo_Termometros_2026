@@ -5,7 +5,12 @@ from prometheus_client import generate_latest, CONTENT_TYPE_LATEST
 from . import views
 
 def metrics_view(request):
+    # Lazily initialize gauges on first scrape to avoid DB queries at startup.
+    from .metrics_init import init_rangos_from_db
+
+    init_rangos_from_db()
     return HttpResponse(generate_latest(), content_type=CONTENT_TYPE_LATEST)
+
 
 app_name = "LectorTermometro"
 urlpatterns = [
