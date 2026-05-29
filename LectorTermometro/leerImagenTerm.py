@@ -36,5 +36,5 @@ def extraer_temperatura(image_path):
     except ValueError:
         print(f"[ERROR OCR] Invalid number: '{valorTerm}'")
         return None
-respuesta = extraer_temperatura("media\imagenesTermometros_uploads/2026/04/23/003_20260423_104924_testcam.jpg")
-print(respuesta)
+#respuesta = extraer_temperatura("media\imagenesTermometros_uploads/2026/04/23/003_20260423_104924_testcam.jpg")
+#print(respuesta)
