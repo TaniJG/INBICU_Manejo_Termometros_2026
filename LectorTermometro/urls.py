@@ -22,5 +22,4 @@ urlpatterns = [
     path("crearTipo", views.CrearTipo.as_view(), name="crearTipo"),
     path('upload/', views.upload_image, name='upload_image'),
     path('metricsT/', metrics_view),
-
 ]

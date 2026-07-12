@@ -15,18 +15,46 @@ def actualizar_temperatura(sender, instance, **kwargs):
         try:
             elemento = ElementoMedido.objects.get(idElemento=instance.idTermometro)
             tipo = elemento.tipoElemento
+            descripcion = elemento.descripElemento
         except ElementoMedido.DoesNotExist:
             tipo = "desconocido"
+            descripcion = "desconocido"
 
         temperatura_termometro.labels(
             id_termometro=instance.idTermometro,
-            tipo_elemento=tipo
+            tipo_elemento=tipo,
+            descripcion_elemento=descripcion
         ).set(instance.temperatura)
+
+
+@receiver(post_delete, sender=LecturaTermometro)
+def borrar_temperatura(sender, instance, **kwargs):
+    if instance.temperatura is None:
+        return
+
+    from .metrics import temperatura_termometro
+
+    try:
+        elemento = ElementoMedido.objects.get(idElemento=instance.idTermometro)
+        tipo = elemento.tipoElemento
+        descripcion = elemento.descripElemento
+    except ElementoMedido.DoesNotExist:
+        tipo = "desconocido"
+        descripcion = "desconocido"
+
+    temperatura_termometro.remove(
+        id_termometro=instance.idTermometro,
+        tipo_elemento=tipo,
+        descripcion_elemento=descripcion,
+    )
+
 
 
 class ElementoMedido(models.Model):
     idElemento = models.CharField(max_length=10)
+    descripElemento = models.CharField(max_length=20, default="")
     tipoElemento = models.CharField(max_length=15)
+
 
 class TipoElemento(models.Model):
     tipoElemento = models.CharField(max_length=15)
